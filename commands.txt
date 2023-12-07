@@ -15,3 +15,15 @@ $ git commit -m "Add commands.txt file"
 ---------------------------------------
 Неправильно. Широкую на шир...  Нужно было не создавать репозиторий, а склонировать по ссылке fork
 ---------------------------------------
+$ git clone https://github.com/what-s-love/vending_machine_byVladislav.git
+$ git status
+$ git branch home_work_25
+$ git checkout home_work_25
+$ git status
+$ git add commands.txt
+$ git commit -m "Add commands.txt"
+$ git status
+$ git add src/acceptor/CardAcceptor.java
+$ git add src/acceptor/CashAcceptor.java
+$ git add commands.txt
+$ git commit -m "Created package /acceptor. Create classes CashAcceptor.java and CardAcceptor.java extends CashAcceptor"
