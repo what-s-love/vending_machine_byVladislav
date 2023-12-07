@@ -1,3 +1,4 @@
+import acceptor.CardAcceptor;
 import acceptor.CashAcceptor;
 import acceptor.CoinAcceptor;
 import enums.ActionLetter;
@@ -11,7 +12,7 @@ public class AppRunner {
 
     private final UniversalArray<Product> products = new UniversalArrayImpl<>();
 
-    private final CashAcceptor cashAcceptor;
+    private CashAcceptor cashAcceptor;
 
     private static boolean isExit = false;
 
@@ -78,7 +79,7 @@ public class AppRunner {
             if ("h".equalsIgnoreCase(action)) {
                 isExit = true;
             } else {
-                print("Недопустимая буква. Попрбуйте еще раз.");
+                print("Недопустимая буква. Попробуйте еще раз.");
                 chooseAction(products);
             }
         }
@@ -90,6 +91,41 @@ public class AppRunner {
         for (int i = 0; i < products.size(); i++) {
             print(String.format(" %s - %s", products.get(i).getActionLetter().getValue(), products.get(i).getName()));
         }
+    }
+
+    private void choosePaymentMethod(int num){
+        switch (num) {
+            case 1:
+                cashAcceptor = new CoinAcceptor(100);
+                break;
+            case 2:
+                cashAcceptor = new CardAcceptor(1000);
+                break;
+            default:
+                print("Не такого варианта. Попробуйте еще раз.");
+                choosePaymentMethod(chooseNum());
+        }
+    }
+
+    public int chooseNum() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Введите цифру: ");
+        String str = sc.nextLine().trim();
+        try {
+            char[] strToChars = str.toCharArray();
+            if (str.isEmpty()) {
+                throw new NumberFormatException("Вы не ввели данные.");
+            }
+            for (char a : strToChars) {
+                if (!Character.isDigit(a)) {
+                    throw new NumberFormatException("Вы ввели недопустимый символ.");
+                }
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            return chooseNum();
+        }
+        return Integer.parseInt(str);
     }
 
     private String fromConsole() {
