@@ -1,0 +1,17 @@
+$ git init
+$ git remote add origin https://github.com/what-s-love/vending_machine_byVladislav.git
+$ git status
+$ git pull
+$ git add .
+$ git commit -m "Initial commit"
+$ git branch new_branch
+$ git switch new_branch
+$ git switch main
+$ git branch -d new_branch
+$ git branch home_work_25
+$ git switch home_work_25
+$ git add commands.txt
+$ git commit -m "Add commands.txt file"
+---------------------------------------
+Неправильно. Широкую на шир...  Нужно было не создавать репозиторий, а склонировать по ссылке fork
+---------------------------------------
