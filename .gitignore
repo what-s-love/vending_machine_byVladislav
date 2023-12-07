@@ -2,6 +2,14 @@
 /.idea
 ./.idea
 .idea/
+.idea/*
+
+./*.iml
+/*.iml
+*.iml
+
+./out/
+/out/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
