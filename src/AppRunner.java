@@ -10,11 +10,10 @@ import java.util.Scanner;
 
 public class AppRunner {
 
-    private final UniversalArray<Product> products = new UniversalArrayImpl<>();
-
-    private CashAcceptor cashAcceptor;
-
     private static boolean isExit = false;
+    private final UniversalArray<Product> products = new UniversalArrayImpl<>();
+    private CashAcceptor cashAcceptor;
+    private boolean cashPay;
 
     private AppRunner() {
         products.addAll(new Product[]{
@@ -25,25 +24,31 @@ public class AppRunner {
                 new Mars(ActionLetter.F, 80),
                 new Pistachios(ActionLetter.G, 130)
         });
-        cashAcceptor = new CoinAcceptor(100);
+        cashAcceptor = null;
+        cashPay = false;
     }
 
     public static void run() {
         AppRunner app = new AppRunner();
-        while (!isExit) {
-            app.startSimulation();
-        }
+
+        app.startSimulation();
     }
 
     private void startSimulation() {
         print("В автомате доступны:");
         showProducts(products);
 
-        print("Монет на сумму: " + cashAcceptor.getAmount());
+        print("Выберите способ оплаты:");
+        print("1 - Cash\n2 - Card");
+        choosePaymentMethod(chooseNum());
 
-        UniversalArray<Product> allowProducts = new UniversalArrayImpl<>();
-        allowProducts.addAll(getAllowedProducts().toArray());
-        chooseAction(allowProducts);
+        while (!isExit) {
+            print("Доступная сумма: " + cashAcceptor.getAmount());
+
+            UniversalArray<Product> allowProducts = new UniversalArrayImpl<>();
+            allowProducts.addAll(getAllowedProducts().toArray());
+            chooseAction(allowProducts);
+        }
 
     }
 
@@ -58,11 +63,13 @@ public class AppRunner {
     }
 
     private void chooseAction(UniversalArray<Product> products) {
-        print(" a - Пополнить баланс");
+        if (cashPay) {
+            print(" a - Пополнить баланс");
+        }
         showActions(products);
         print(" h - Выйти");
         String action = fromConsole().substring(0, 1);
-        if ("a".equalsIgnoreCase(action)) {
+        if ("a".equalsIgnoreCase(action) && cashPay) {
             cashAcceptor.setAmount(cashAcceptor.getAmount() + 10);
             print("Вы пополнили баланс на 10");
             return;
@@ -83,8 +90,6 @@ public class AppRunner {
                 chooseAction(products);
             }
         }
-
-
     }
 
     private void showActions(UniversalArray<Product> products) {
@@ -93,16 +98,18 @@ public class AppRunner {
         }
     }
 
-    private void choosePaymentMethod(int num){
+    private void choosePaymentMethod(int num) {
         switch (num) {
             case 1:
                 cashAcceptor = new CoinAcceptor(100);
+                cashPay = true;
                 break;
             case 2:
                 cashAcceptor = new CardAcceptor(1000);
+                print("Прислоните карту к считывающему аппарату");
                 break;
             default:
-                print("Не такого варианта. Попробуйте еще раз.");
+                print("Нет такого варианта. Попробуйте еще раз.");
                 choosePaymentMethod(chooseNum());
         }
     }
