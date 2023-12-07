@@ -27,3 +27,6 @@ $ git add src/acceptor/CardAcceptor.java
 $ git add src/acceptor/CashAcceptor.java
 $ git add commands.txt
 $ git commit -m "Created package /acceptor. Create classes CashAcceptor.java and CardAcceptor.java extends CashAcceptor"
+$ git add src/AppRunner.java
+$ git add src/acceptor/CoinAcceptor.java
+$ git commit -m "Class CoinAcceptor changed and added to acceptor package"
