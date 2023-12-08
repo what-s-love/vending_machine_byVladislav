@@ -30,3 +30,8 @@ $ git commit -m "Created package /acceptor. Create classes CashAcceptor.java and
 $ git add src/AppRunner.java
 $ git add src/acceptor/CoinAcceptor.java
 $ git commit -m "Class CoinAcceptor changed and added to acceptor package"
+$ git commit -m "Changed each coinAcceptor to cashAcceptor, changed commands.txt"
+$ git commit -m "Created method choosePaymentMethod, created method chooseNum"
+$ git commit -m "AppRunner.java: created boolean cashPay and cardPay, changed method startSimulation, changed method chooseAction, moved loop while to startSimulation()"
+$ git add .
+$ git commit "refresh commands.txt"
