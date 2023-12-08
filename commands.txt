@@ -35,3 +35,8 @@ $ git commit -m "Created method choosePaymentMethod, created method chooseNum"
 $ git commit -m "AppRunner.java: created boolean cashPay and cardPay, changed method startSimulation, changed method chooseAction, moved loop while to startSimulation()"
 $ git add .
 $ git commit "refresh commands.txt"
+$ git push -u origin home_work_25
+$ git switch master
+$ git merge home_work_25
+$ git status
+$ git push -u origin master
